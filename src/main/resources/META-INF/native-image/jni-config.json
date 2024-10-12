@@ -1,0 +1,24 @@
+[
+  {
+    "name": "sun.net.dns.ResolverConfigurationImpl",
+    "queryAllDeclaredMethods": true,
+    "fields": [
+      {
+        "name": "searchlist",
+        "allowWrite": true
+      },
+      {
+        "name": "nameservers",
+        "allowWrite": true
+      },
+      {
+        "name": "os_searchlist",
+        "allowWrite": true
+      },
+      {
+        "name": "os_nameservers",
+        "allowWrite": true
+      }
+    ]
+  }
+]
