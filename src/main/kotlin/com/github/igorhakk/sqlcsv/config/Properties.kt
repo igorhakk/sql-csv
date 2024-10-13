@@ -21,6 +21,7 @@ object PropertiesParser {
             .addOption("my", "mysql", true, "MySQL host")
             .addOption("pg", "pgsql", true, "PostgreSQL host")
             .addOption("db", "dbname",true, "DB Name")
+            .addOption("ssl", false, "SSL Mode")
             .addOption("u", "user", true, "DB User")
             .addOption("p", "pass", true, "DB Password")
             .addOption("q", "query", true, "Query to execute")
@@ -49,10 +50,12 @@ object PropertiesParser {
             throw IllegalArgumentException("Cannot specify both mysql and pgsql")
         }
         val dbUrl = StringBuilder()
+        dbUrl.append("r2dbc")
+        cmd.hasOption("ssl").takeIf { it }?.also { dbUrl.append("s") }
         if (cmd.hasOption("mysql")) {
-            dbUrl.append("r2dbcs:mysql://")
+            dbUrl.append(":mysql://")
         } else if (cmd.hasOption("pgsql")) {
-            dbUrl.append("r2dbc:postgresql://")
+            dbUrl.append(":postgresql://")
         }
 
         dbUrl
