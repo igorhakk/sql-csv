@@ -16,8 +16,11 @@ object ConnectionExtension {
     }
 
     fun String.escapeCsv(): String {
-        return this.replace("\"", "\"\"")
+        return this
+            .replace("\"", "\"\"")
             .replace("\n", "\\n")
             .replace("\r", "\\r")
+            .replace(";", "\\;")
+            .replace("\t", "\\t")
     }
 }
