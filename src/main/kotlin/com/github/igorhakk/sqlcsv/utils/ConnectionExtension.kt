@@ -14,4 +14,10 @@ object ConnectionExtension {
             .flatMapMany { Mono.from(it.createStatement(query).execute()) }
             .flatMap { it.map { row, md -> transform(row, md) } }
     }
+
+    fun String.escapeCsv(): String {
+        return this.replace("\"", "\"\"")
+            .replace("\n", "\\n")
+            .replace("\r", "\\r")
+    }
 }

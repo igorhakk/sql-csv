@@ -2,6 +2,7 @@ package com.github.igorhakk.sqlcsv
 
 import com.github.igorhakk.sqlcsv.config.Properties
 import com.github.igorhakk.sqlcsv.config.PropertiesParser.fromArgs
+import com.github.igorhakk.sqlcsv.utils.ConnectionExtension.escapeCsv
 import com.github.igorhakk.sqlcsv.utils.ConnectionExtension.executeQuery
 import io.r2dbc.spi.ConnectionFactories
 import sun.misc.Signal
@@ -23,7 +24,7 @@ fun main(args: Array<String>) {
         it.executeQuery(props.query) { row, md ->
             md.columnMetadatas
                 .joinToString(";") { c ->
-                    "\"${row.get(c.name)?.toString()?.replace("\n", "\\n")}\""
+                    "\"${row.get(c.name)?.toString()?.escapeCsv()}\""
                 }.plus("\n")
         }
     }.let {
